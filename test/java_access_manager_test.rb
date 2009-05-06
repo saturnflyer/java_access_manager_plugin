@@ -1,4 +1,5 @@
 require 'test/unit'
+require 'person'
 
 class JavaAccessManagerTest < Test::Unit::TestCase
   # Replace this with your real tests.
