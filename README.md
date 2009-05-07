@@ -33,6 +33,9 @@ production:
 Example
 =======
 
+Inside of your <code>application_controller.rb</code> file, you might include something like the
+following:
+
 <pre>
 java_access_manager
 
@@ -45,6 +48,30 @@ def get_current_user
   @user = access_manager_user
   @groups = access_manager_groups
   @roles = access_manager_roles
+end
+</pre>
+
+You may need to adjust the following lines of code in "vendor/plugins/java\_access\_manager/lib/java\_access\_manager.rb"
+to do the "right thing" from you application's perspective:
+
+<pre>
+def get_user_information
+  the_person = nil
+  user_id = ""
+  role_string = ""
+  
+  if access_manager_environment["use_authority"] == "stubbed"
+    user_id = access_manager_environment["stubbed_user"]["user_id"]
+  else
+    user_id = request.env["HTTP_USER_ID"]
+  end
+
+  unless user_id.blank? or user_id == "anonymous"
+    the_person = Person.find_by_username(user_id)
+  else
+    the_person = Person.new(:username => 'anonymous', :first_name => 'anonymous', :last_name => 'user')
+  end
+  return the_person
 end
 </pre>
 
