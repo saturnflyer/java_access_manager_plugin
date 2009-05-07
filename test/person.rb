@@ -8,6 +8,6 @@ class Person
   end
   
   def self.find_by_username(username)
-    return Person.new(:username => "username", :first_name => "First", :last_name => "Name")
+    return Person.new(:username => username, :first_name => "First", :last_name => "Name")
   end
 end

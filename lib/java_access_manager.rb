@@ -39,7 +39,6 @@ module SaturnFlyer
       end
 
       def load_config_data
-        logger.debug "RAILS PATH: #{RAILS_ROOT}/config/authentication.yml"
         if @configuration.blank?
           fname = "#{RAILS_ROOT}/config/authentication.yml"
           if File.exist?(fname)
@@ -123,7 +122,6 @@ module SaturnFlyer
         end
       end
 
-      logger.debug "Groups Information: #{result.join(', ')}"
       return result
     end
     
